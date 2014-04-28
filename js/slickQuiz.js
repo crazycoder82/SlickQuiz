@@ -19,6 +19,7 @@
             defaults = {
                 checkAnswerText:  'Check My Answer!',
                 nextQuestionText: 'Next &raquo;',
+                lastQuestionText: 'Complete quiz!',
                 backButtonText: '',
                 tryAgainText: '',
                 skipStartButton: false,
@@ -283,12 +284,21 @@
 
                         // If we're not showing responses per question, show next question button and make it check the answer too
                         if (!plugin.config.perQuestionResponseMessaging) {
-                            questionHTML.append('<a href="#" class="button ' + nextQuestionClass + ' ' + checkAnswerClass + '">' + plugin.config.nextQuestionText + '</a>');
+                            if (questionCount != count) {
+                                questionHTML.append('' + plugin.config.nextQuestionText + '');
+                            }else{
+                                questionHTML.append('' + plugin.config.lastQuestionText + '');
+                            }
                         } else {
-                            questionHTML.append('<a href="#" class="button ' + nextQuestionClass + '">' + plugin.config.nextQuestionText + '</a>');
-                            questionHTML.append('<a href="#" class="button ' + checkAnswerClass + '">' + plugin.config.checkAnswerText + '</a>');
+                            if (questionCount != count) {
+                                questionHTML.append('' + plugin.config.nextQuestionText + '');
+                                questionHTML.append('' + plugin.config.checkAnswerText + '');
+                            }else{
+                                questionHTML.append('' + plugin.config.lastQuestionText + '');
+                                questionHTML.append('' + plugin.config.checkAnswerText + '');
+                            }
                         }
-
+                        
                         // Append question & answers to quiz
                         quiz.append(questionHTML);
 
